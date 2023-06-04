@@ -80,7 +80,10 @@ export default function RegistrationScreen() {
 
           {!keyboard && (
             <View style={styles.bottomform}>
-              <TouchableOpacity style={styles.btn}>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => console.log(data)}
+              >
                 <Text style={styles.btntext}>Увійти</Text>
               </TouchableOpacity>
               <View style={styles.wrapper}>

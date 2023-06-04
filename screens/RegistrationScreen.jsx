@@ -51,7 +51,10 @@ export default function RegistrationScreen() {
           source={require("../assets/images/Photo_BG.jpg")}
           style={styles.background}
         >
-          <KeyboardAvoidingView style={styles.back} behavior="padding">
+          <KeyboardAvoidingView
+            style={styles.back}
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          >
             <View
               style={{
                 ...styles.topform,
@@ -154,13 +157,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   back: {
-    // backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
   topform: {
     alignItems: "center",
-    // backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingHorizontal: 16,
