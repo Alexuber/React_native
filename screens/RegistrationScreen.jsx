@@ -46,86 +46,84 @@ export default function RegistrationScreen() {
 
   return (
     <TouchableWithoutFeedback onPress={hideKeyboard}>
-      <View style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        style={styles.back}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
         <ImageBackground
           source={require("../assets/images/Photo_BG.jpg")}
           style={styles.background}
         >
-          <KeyboardAvoidingView
-            style={styles.back}
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
+          <View
+            style={{
+              ...styles.topform,
+              marginTop: 250,
+              backgroundColor: !keyboard ? "#fff" : "transparent",
+            }}
           >
-            <View
-              style={{
-                ...styles.topform,
-                marginTop: 250,
-                backgroundColor: !keyboard ? "#fff" : "transparent",
-              }}
-            >
-              {image ? (
-                <View style={styles.uploadwrapper}>
-                  <Image style={styles.upload} source={{ uri: image }} />
+            {image ? (
+              <View style={styles.uploadwrapper}>
+                <Image style={styles.upload} source={{ uri: image }} />
 
-                  <Pressable
-                    onPress={() => setImage(null)}
-                    style={styles.addicon}
-                  >
-                    <AntDesign name="closecircleo" size={25} color="#FF6C00" />
-                  </Pressable>
-                </View>
-              ) : (
-                <View style={styles.uploadwrapper}>
-                  <View style={styles.upload}>
-                    <Pressable onPress={pick} style={styles.addicon}>
-                      <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
-                    </Pressable>
-                  </View>
-                </View>
-              )}
-              <View style={styles.titlewrapper}>
-                <Text style={styles.title}>Реєстрація</Text>
-              </View>
-              <CustomInput
-                style={styles.input}
-                placeholder="Логін"
-                value={data.login}
-                name="login"
-                onFocus={() => setKeyboard(true)}
-                onChangeText={(value) =>
-                  setData((prev) => ({ ...prev, login: value }))
-                }
-              ></CustomInput>
-              <CustomInput
-                style={styles.input}
-                placeholder="Адреса електронної пошти"
-                value={data.email}
-                onFocus={() => setKeyboard(true)}
-                onChangeText={(value) =>
-                  setData((prev) => ({ ...prev, email: value }))
-                }
-              ></CustomInput>
-              <View style={styles.passcontainer}>
-                <CustomInput
-                  style={styles.password}
-                  placeholder="Пароль"
-                  value={data.password}
-                  onFocus={() => setKeyboard(true)}
-                  onChangeText={(value) =>
-                    setData((prev) => ({ ...prev, password: value }))
-                  }
-                  secureTextEntry={hidden}
-                ></CustomInput>
                 <Pressable
-                  style={styles.hidewrapper}
-                  onPress={() => setHidden(!hidden)}
+                  onPress={() => setImage(null)}
+                  style={styles.addicon}
                 >
-                  <Text style={styles.hide}>
-                    {hidden ? "Показати" : "Сховати"}
-                  </Text>
+                  <AntDesign name="closecircleo" size={25} color="#FF6C00" />
                 </Pressable>
               </View>
+            ) : (
+              <View style={styles.uploadwrapper}>
+                <View style={styles.upload}>
+                  <Pressable onPress={pick} style={styles.addicon}>
+                    <AntDesign name="pluscircleo" size={25} color="#FF6C00" />
+                  </Pressable>
+                </View>
+              </View>
+            )}
+            <View style={styles.titlewrapper}>
+              <Text style={styles.title}>Реєстрація</Text>
             </View>
-          </KeyboardAvoidingView>
+            <CustomInput
+              style={styles.input}
+              placeholder="Логін"
+              value={data.login}
+              name="login"
+              onFocus={() => setKeyboard(true)}
+              onChangeText={(value) =>
+                setData((prev) => ({ ...prev, login: value }))
+              }
+            ></CustomInput>
+            <CustomInput
+              style={styles.input}
+              placeholder="Адреса електронної пошти"
+              value={data.email}
+              onFocus={() => setKeyboard(true)}
+              onChangeText={(value) =>
+                setData((prev) => ({ ...prev, email: value }))
+              }
+            ></CustomInput>
+            <View style={styles.passcontainer}>
+              <CustomInput
+                style={styles.password}
+                placeholder="Пароль"
+                value={data.password}
+                onFocus={() => setKeyboard(true)}
+                onChangeText={(value) =>
+                  setData((prev) => ({ ...prev, password: value }))
+                }
+                secureTextEntry={hidden}
+              ></CustomInput>
+              <Pressable
+                style={styles.hidewrapper}
+                onPress={() => setHidden(!hidden)}
+              >
+                <Text style={styles.hide}>
+                  {hidden ? "Показати" : "Сховати"}
+                </Text>
+              </Pressable>
+            </View>
+          </View>
 
           {!keyboard && (
             <View
@@ -145,7 +143,7 @@ export default function RegistrationScreen() {
             </View>
           )}
         </ImageBackground>
-      </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 }
@@ -159,6 +157,7 @@ const styles = StyleSheet.create({
   back: {
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+    flex: 1,
   },
   topform: {
     alignItems: "center",
